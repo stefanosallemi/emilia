@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>GOODB</title>
+        <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <h2>Items</h2>
+        <main></main>
+    </body>
+    <script>
+        const url = "https://docs.google.com/spreadsheets/d/1E_fhU_s7a67g3wkeh-AigYXwC4TEni9g0jLrBb3kOUY/export?format=csv";
+        const main = document.querySelector("main");
+        fetch(url).then(result=>result.text()).then(function(csvtext)  {
+            return csv().fromString(csvtext);
+        }).then(function(csv)  {
+            //main.innerHTML = "<code>" + JSON.stringify(csv) + "</code>";
+            csv.forEach(function(row)  {
+            main.innerHTML += "<h3>" + row.name + "</h3>";
+            main.innerHTML += "<p>" + row.description + "</p>";
+            main.innerHTML += "<strong>" + row.price + "</strong>";
+            main.innerHTML += "<img src=" + row.image +">";
+            })
+        });
+    
+    </script>
+</html>
